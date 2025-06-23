@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Image Button with Sound</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #sound-button {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      overflow: hidden;
+      padding: 0;
+      transition: transform 0.1s ease, background 0.3s ease;
+    }
+
+    #sound-button:focus {
+      outline: none;
+    }
+
+    #sound-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    #sound-button:active {
+      transform: scale(0.9);
+    }
+
+    #sound-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="sound-button">
+    <img src="my-image.png" alt="My Image" />
+  </button>
+
+  <audio id="custom-sound" src="click-sound.mp3" preload="auto"></audio>
+
+  <script>
+    const button = document.getElementById('sound-button');
+    const sound = document.getElementById('custom-sound');
+
+    button.addEventListener('click', () => {
+      sound.currentTime = 0;
+      sound.play();
+    });
+  </script>
+
+</body>
+</html>
