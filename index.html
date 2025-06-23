@@ -2,18 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Image Button with Sound</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surprise Button</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       font-family: 'Segoe UI', sans-serif;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    .label {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      animation: pulseText 2s infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .arrows {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+    }
+
+    .arrow {
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 25px solid #ffffff;
+      animation: bounce 1.5s infinite ease-in-out;
+    }
+
+    .arrow:nth-child(1) { animation-delay: 0s; }
+    .arrow:nth-child(2) { animation-delay: 0.2s; }
+    .arrow:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
     }
 
     #sound-button {
@@ -54,17 +96,26 @@
 </head>
 <body>
 
+  <div class="label">CLICK ME FOR SURPRISE</div>
+
+  <div class="arrows">
+    <div class="arrow"></div>
+    <div class="arrow"></div>
+    <div class="arrow"></div>
+  </div>
+
   <button id="sound-button">
-    <img src="my-image.png" alt="My Image" />
+    <img src="button-image.png" alt="Button Image" />
   </button>
 
-  <audio id="custom-sound" src="click-sound.mp3" preload="auto"></audio>
+  <audio id="custom-sound" src="tap-sound.mp3" preload="auto"></audio>
 
   <script>
     const button = document.getElementById('sound-button');
     const sound = document.getElementById('custom-sound');
 
     button.addEventListener('click', () => {
+      sound.volume = 1.0; // Set volume to full
       sound.currentTime = 0;
       sound.play();
     });
