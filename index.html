@@ -2,123 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Surprise Button</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support Me</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
       display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', sans-serif;
       flex-direction: column;
-      color: #fff;
-    }
-
-    .label {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      text-align: center;
-      animation: pulseText 2s infinite;
-    }
-
-    @keyframes pulseText {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.8; }
-    }
-
-    .arrows {
-      position: relative;
-      width: 100%;
-      height: 60px;
-      margin-bottom: 20px;
-      display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 60px;
+      height: 100vh;
+      color: #212529;
     }
 
-    .arrow {
-      width: 0;
-      height: 0;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-top: 25px solid #ffffff;
-      animation: bounce 1.5s infinite ease-in-out;
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #343a40;
     }
 
-    .arrow:nth-child(1) { animation-delay: 0s; }
-    .arrow:nth-child(2) { animation-delay: 0.2s; }
-    .arrow:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
-    }
-
-    #sound-button {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    button {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 15px 25px;
+      font-size: 1.1rem;
+      border-radius: 8px;
       cursor: pointer;
-      overflow: hidden;
-      padding: 0;
-      transition: transform 0.1s ease, background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
-    #sound-button:focus {
-      outline: none;
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
     }
 
-    #sound-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    #sound-button:active {
-      transform: scale(0.9);
-    }
-
-    #sound-button img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      pointer-events: none;
+    button:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
 <body>
 
-  <div class="label">CLICK ME FOR SURPRISE</div>
+  <h1>Thank you for your support!</h1>
+  <button onclick="playSound()">SUPPORT ME BY CLICKING THIS BUTTON</button>
 
-  <div class="arrows">
-    <div class="arrow"></div>
-    <div class="arrow"></div>
-    <div class="arrow"></div>
-  </div>
-
-  <button id="sound-button">
-    <img src="button-image.png" alt="Button Image" />
-  </button>
-
-  <audio id="custom-sound" src="tap-sound.mp3" preload="auto"></audio>
+  <audio id="tapSound" src="tap-sound.mp3" preload="auto"></audio>
 
   <script>
-    const button = document.getElementById('sound-button');
-    const sound = document.getElementById('custom-sound');
-
-    button.addEventListener('click', () => {
-      sound.volume = 1.0; // Set volume to full
-      sound.currentTime = 0;
-      sound.play();
-    });
+    function playSound() {
+      const audio = document.getElementById('tapSound');
+      audio.currentTime = 0; // rewind to start
+      audio.play();
+    }
   </script>
 
 </body>
